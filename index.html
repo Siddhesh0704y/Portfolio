@@ -14,31 +14,32 @@
     const items = JSON.parse(localStorage.getItem("showcaseItems")) || [];
 
     if (items.length === 0) {
-      contentDiv.innerHTML = "<p>No items yet. Check back later!</p>";
+      contentDiv.innerHTML = "<p style='text-align:center;'>No items yet. Check back later!</p>";
     } else {
       items.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "item";
+        const card = document.createElement("div");
+        card.className = "card";
 
         let preview = "";
-        if (item.type.startsWith("image/")) {
-          preview = `<img src="${item.url}" alt="${item.title}" style="max-width:100%; border-radius:8px; margin:10px 0;">`;
-        } else if (item.type.startsWith("video/")) {
-          preview = `<video controls style="max-width:100%; margin:10px 0;">
-                      <source src="${item.url}" type="${item.type}">
-                      Your browser does not support video.
-                     </video>`;
+        if (item.type && item.type.startsWith("image/")) {
+          preview = `<img src="${item.url}" alt="${item.title}">`;
+        } else if (item.type && item.type.startsWith("video/")) {
+          preview = `<video controls><source src="${item.url}" type="${item.type}"></video>`;
+        } else if (item.type === "application/pdf") {
+          preview = `<div class="file-icon">📄</div>`;
         } else {
-          preview = `<p>[File: ${item.type}]</p>`;
+          preview = `<div class="file-icon">📁</div>`;
         }
 
-        div.innerHTML = `
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
+        card.innerHTML = `
           ${preview}
-          <a href="${item.url}" download="${item.title}">Download</a>
+          <div class="card-body">
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <a href="${item.url}" download="${item.title}" class="btn btn-download">Download</a>
+          </div>
         `;
-        contentDiv.appendChild(div);
+        contentDiv.appendChild(card);
       });
     }
   </script>
