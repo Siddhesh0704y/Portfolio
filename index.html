@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Showcase Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>My Showcase</h1>
+  <div class="container" id="content"></div>
+
+  <script>
+    const contentDiv = document.getElementById("content");
+    const items = JSON.parse(localStorage.getItem("showcaseItems")) || [];
+
+    if (items.length === 0) {
+      contentDiv.innerHTML = "<p>No items yet. Check back later!</p>";
+    } else {
+      items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "item";
+
+        let preview = "";
+        if (item.type.startsWith("image/")) {
+          preview = `<img src="${item.url}" alt="${item.title}" style="max-width:100%; border-radius:8px; margin:10px 0;">`;
+        } else if (item.type.startsWith("video/")) {
+          preview = `<video controls style="max-width:100%; margin:10px 0;">
+                      <source src="${item.url}" type="${item.type}">
+                      Your browser does not support video.
+                     </video>`;
+        } else {
+          preview = `<p>[File: ${item.type}]</p>`;
+        }
+
+        div.innerHTML = `
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          ${preview}
+          <a href="${item.url}" download="${item.title}">Download</a>
+        `;
+        contentDiv.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Admin Panel</h1>
+  <form id="addItemForm">
+    <input type="text" id="title" placeholder="Title" required>
+    <textarea id="description" placeholder="Description"></textarea>
+    
+    <!-- File input -->
+    <input type="file" id="fileInput" required>
+    
+    <button type="submit">Add Item</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("addItemForm");
+    const fileInput = document.getElementById("fileInput");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert("Please select a file!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const fileData = event.target.result; // Base64 string
+
+        const newItem = { 
+          title, 
+          description, 
+          url: fileData, 
+          type: file.type 
+        };
+
+        let items = JSON.parse(localStorage.getItem("showcaseItems")) || [];
+        items.push(newItem);
+        localStorage.setItem("showcaseItems", JSON.stringify(items));
+
+        alert("Item added successfully!");
+        form.reset();
+      };
+
+      reader.readAsDataURL(file); // Convert to Base64
+    });
+  </script>
+</body>
+</html>
