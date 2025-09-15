@@ -4,16 +4,43 @@
   <meta charset="UTF-8">
   <title>Admin Panel</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .admin-form {
+      max-width: 500px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .admin-form input, 
+    .admin-form textarea, 
+    .admin-form button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .admin-form button {
+      background: #16a34a;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .admin-form button:hover {
+      background: #166534;
+    }
+  </style>
 </head>
 <body>
   <h1>Admin Panel</h1>
-  <form id="addItemForm">
+  <form id="addItemForm" class="admin-form">
     <input type="text" id="title" placeholder="Title" required>
     <textarea id="description" placeholder="Description"></textarea>
-    
-    <!-- File input -->
     <input type="file" id="fileInput" required>
-    
     <button type="submit">Add Item</button>
   </form>
 
@@ -52,7 +79,7 @@
         form.reset();
       };
 
-      reader.readAsDataURL(file); // Convert to Base64
+      reader.readAsDataURL(file); // Convert file → Base64
     });
   </script>
 </body>
