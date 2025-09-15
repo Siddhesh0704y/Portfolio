@@ -1,101 +1,87 @@
-/* General */
+/* General Layout */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f5f7fa;
+  background: #f4f6f9;
   color: #333;
 }
 
 h1 {
   text-align: center;
+  margin: 0;
   padding: 20px;
-  background: #2c3e50;
+  background: #1e293b;
   color: white;
-  margin: 0 0 20px 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
 }
 
-/* Main content */
+/* Content container */
 .container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 
-/* Card styling */
-.item {
+/* Card style */
+.card {
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* Preview area */
+.card img,
+.card video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.card .file-icon {
+  font-size: 50px;
+  text-align: center;
+  padding: 20px 0;
+  color: #475569;
+}
+
+/* Card content */
+.card-body {
   padding: 15px;
-  margin: 15px 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
 }
-.item:hover {
-  transform: translateY(-3px);
+.card-body h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #1e293b;
 }
-
-.item h3 {
-  margin-top: 0;
-  color: #2c3e50;
-}
-
-.item p {
+.card-body p {
+  font-size: 14px;
   color: #555;
-  margin: 10px 0;
+  margin-bottom: 15px;
 }
 
-.item a {
+/* Buttons */
+.btn {
   display: inline-block;
-  padding: 8px 15px;
-  background: #3498db;
-  color: white;
-  border-radius: 5px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
   text-decoration: none;
   transition: background 0.2s;
 }
-.item a:hover {
-  background: #217dbb;
-}
-
-/* Form (admin page) */
-form {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-input, textarea {
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 15px;
-  box-sizing: border-box;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  background: #27ae60;
+.btn-download {
+  background: #2563eb;
   color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s;
 }
-button:hover {
-  background: #1e8449;
+.btn-download:hover {
+  background: #1e40af;
 }
-
